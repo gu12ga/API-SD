@@ -4,6 +4,7 @@
 #
 #
 import cv2
+import time 
 
 # Função para detectar movimento
 def detecta_movimento(frame_antigo, frame_atual, threshold=25):
@@ -45,6 +46,9 @@ while True:
 
     # Exibe o frame (opcional)
     cv2.imshow("Detecção de Presença", frame_atual)
+    
+    # timer para capturar o próximo frame.
+    time.sleep(3)
 
     # Sai do loop quando a tecla 'q' é pressionada
     if cv2.waitKey(1) & 0xFF == ord('q'):
