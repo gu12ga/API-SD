@@ -48,7 +48,7 @@ while True:
     cv2.imshow("Detecção de Presença", frame_atual)
     
     # timer para capturar o próximo frame.
-    time.sleep(3)
+    time.sleep(1)
 
     # Sai do loop quando a tecla 'q' é pressionada
     if cv2.waitKey(1) & 0xFF == ord('q'):
