@@ -1,10 +1,5 @@
-# Faz a instalação:
-#
-#pip install opencv-python
-#
-#
 import cv2
-import time 
+import time
 
 # Função para detectar movimento
 def detecta_movimento(frame_antigo, frame_atual, threshold=25):
@@ -30,6 +25,9 @@ captura = cv2.VideoCapture(0)
 # Lê o primeiro frame
 _, frame_antigo = captura.read()
 
+# Cria a janela fora do loop
+cv2.namedWindow("Detecção de Presença", cv2.WINDOW_NORMAL)
+
 while True:
     # Lê o próximo frame
     _, frame_atual = captura.read()
@@ -46,12 +44,13 @@ while True:
 
     # Exibe o frame (opcional)
     cv2.imshow("Detecção de Presença", frame_atual)
-    
+
     # timer para capturar o próximo frame.
     time.sleep(1)
 
-    # Sai do loop quando a tecla 'q' é pressionada
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    # Verifica se a tecla 'q' é pressionada
+    key = cv2.waitKey(1) & 0xFF
+    if key in (ord('q'), 27):  # 'q' ou tecla Esc
         break
 
 # Libera os recursos
