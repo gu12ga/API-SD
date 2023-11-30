@@ -32,8 +32,8 @@ while True:
     # Lê o próximo frame
     _, frame_atual = captura.read()
 
-    # Detecta movimento
-    movimento = detecta_movimento(frame_antigo, frame_atual)
+    # Detecta movimento com um threshold mais alto (por exemplo, 100)
+    movimento = detecta_movimento(frame_antigo, frame_atual, threshold=100)
 
     # Atualiza o frame antigo
     frame_antigo = frame_atual.copy()
