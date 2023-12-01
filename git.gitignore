@@ -1,0 +1,35 @@
+# Arquivos de ambiente
+.env
+
+# Diretórios do ambiente virtual
+venv/
+virtualenv/
+env/
+
+# Arquivos de byte-compiled Python
+*.pyc
+__pycache__/
+
+# Arquivos específicos do Django
+db.sqlite3
+*.log
+
+# Arquivos de mídia
+media/
+
+# Diretórios específicos do IDE (Exemplo para o VS Code)
+.vscode/
+
+# Outros arquivos e diretórios gerados localmente
+*.pyo
+*.pyc
+*.pyd
+__pycache__/
+*.db
+*.sqlite3
+*.log
+*.bak
+*.swp
+
+# Arquivo de configuração para o PyCharm
+.idea/
