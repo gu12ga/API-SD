@@ -39,7 +39,9 @@ while True:
         teste2 += 1
         if teste2 >= 3:
             try:
-                response = requests.post(API_URL, data={"presença": "n_presente"})
+                data = {"presença": "presente"}
+                headers = {"Content-Type": "application/json"}
+                response = requests.post(API_URL, data=json.dumps(data), headers=headers)
                 if response.status_code == 200:
                     print("Dados enviados com sucesso para a API!")
                 else:
