@@ -1,5 +1,6 @@
 import cv2
 import time
+import json
 
 import requests
 API_URL = "http://luisteixeira13.pythonanywhere.com/leitor/"  # Substitua pelo URL real da sua API
@@ -49,14 +50,17 @@ while True:
     
     if movimento:
         print("Presença detectada!")
-        
+
         teste2 = 0
         teste = True
-        
+
         # Aqui você pode adicionar a lógica para enviar dados para a API
-        # Exemplo de envio de dados usando requests.post
+        # Exemplo de envio de dados usando requests.post com JSON
         try:
-            response = requests.post(API_URL, data={"presença": "presente"})
+            data = {"presença": "presente"}
+            headers = {"Content-Type": "application/json"}
+            response = requests.post(API_URL, data=json.dumps(data), headers=headers)
+
             if response.status_code == 200:
                 print("Dados enviados com sucesso para a API!")
             else:
@@ -66,6 +70,7 @@ while True:
 
     cv2.imshow("Detecção de Presença", frame_atual)
     key = cv2.waitKey(1) & 0xFF
+    
     if key in (ord('q'), 27):
         break
 
