@@ -37,7 +37,7 @@ while True:
         # Aqui você pode adicionar a lógica para enviar dados para a API
         # Exemplo de envio de dados usando requests.post
         try:
-            response = requests.post(API_URL, data={"status": "movimento_detectado"})
+            response = requests.post(API_URL, data={"presença": "presente"})
             if response.status_code == 200:
                 print("Dados enviados com sucesso para a API!")
             else:
