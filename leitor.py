@@ -2,7 +2,7 @@ import cv2
 import time
 
 import requests
-API_URL = "http://luisteixeira13.pythonanywhere.com/"  # Substitua pelo URL real da sua API
+API_URL = "http://luisteixeira13.pythonanywhere.com/leitor/"  # Substitua pelo URL real da sua API
 # Função para detectar movimento
 def detecta_movimento(frame_antigo, frame_atual, threshold=25):
     # Converte os frames para escala de cinza
