@@ -1,6 +1,8 @@
 import cv2
 import time
 
+import requests
+API_URL = "https://www.pythonanywhere.com/user/luisteixeira13/files/home/luisteixeira13/CasaInteligente/"  # Substitua pelo URL real da sua API
 # Função para detectar movimento
 def detecta_movimento(frame_antigo, frame_atual, threshold=25):
     # Converte os frames para escala de cinza
@@ -19,40 +21,34 @@ def detecta_movimento(frame_antigo, frame_atual, threshold=25):
     # Verifica se há contornos significativos
     return len(contornos) > 0
 
-# Inicializa a câmera
 captura = cv2.VideoCapture(0)
-
-# Lê o primeiro frame
 _, frame_antigo = captura.read()
 
-# Cria a janela fora do loop
 cv2.namedWindow("Detecção de Presença", cv2.WINDOW_NORMAL)
 
 while True:
-    # Lê o próximo frame
     _, frame_atual = captura.read()
-
-    # Detecta movimento com um threshold mais alto (por exemplo, 100)
     movimento = detecta_movimento(frame_antigo, frame_atual, threshold=100)
-
-    # Atualiza o frame antigo
     frame_antigo = frame_atual.copy()
 
-    # Exibe o resultado
     if movimento:
         print("Presença detectada!")
+        
+        # Aqui você pode adicionar a lógica para enviar dados para a API
+        # Exemplo de envio de dados usando requests.post
+        try:
+            response = requests.post(API_URL, data={"status": "movimento_detectado"})
+            if response.status_code == 200:
+                print("Dados enviados com sucesso para a API!")
+            else:
+                print(f"Falha ao enviar dados para a API. Código de status: {response.status_code}")
+        except Exception as e:
+            print(f"Erro ao enviar dados para a API: {e}")
 
-    # Exibe o frame (opcional)
     cv2.imshow("Detecção de Presença", frame_atual)
-
-    # timer para capturar o próximo frame.
-    time.sleep(1)
-
-    # Verifica se a tecla 'q' é pressionada
     key = cv2.waitKey(1) & 0xFF
-    if key in (ord('q'), 27):  # 'q' ou tecla Esc
+    if key in (ord('q'), 27):
         break
 
-# Libera os recursos
 captura.release()
 cv2.destroyAllWindows()
