@@ -28,8 +28,8 @@ while True:
         if response.status_code == 200:
             print(response.json())
             data = response.json()  # Aqui você acessa os dados JSON
-            presenca = data['mensagem']
-            if presenca == 'Valor de presença: presente':
+            presenca = data['presença']
+            if presenca == 'presente':
                 set_brightness(0.9)
                 print("Presente!!!")
             else:
