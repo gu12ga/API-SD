@@ -27,17 +27,40 @@ _, frame_antigo = captura.read()
 
 cv2.namedWindow("Detecção de Presença", cv2.WINDOW_NORMAL)
 
-teste = False
-teste2 = 0
 
+jaFez = False
+jaFez2 = False
+teste = 0
 while True:
     _, frame_atual = captura.read()
     movimento = detecta_movimento(frame_antigo, frame_atual, threshold=100)
     frame_antigo = frame_atual.copy()
 
-    if teste:
-        teste2 += 1
-        if teste2 >= 3:
+    if movimento:
+        print("Presença detectada!")
+        teste = 0
+        if not jaFez:
+            jaFez = True
+            jaFez2 = False
+            # Aqui você pode adicionar a lógica para enviar dados para a API
+            # Exemplo de envio de dados usando requests.post com JSON
+            try:
+                data = {"presença": "presente"}
+                headers = {"Content-Type": "application/json"}
+                response = requests.post(API_URL, data=json.dumps(data), headers=headers)
+
+                if response.status_code == 200:
+                    print("Dados enviados com sucesso para a API!")
+                else:
+                    print(f"Falha ao enviar dados para a API. Código de status: {response.status_code}")
+            except Exception as e:
+                print(f"Erro ao enviar dados para a API: {e}")
+    else:
+        teste += 1
+        if not jaFez2 and teste >= 3:
+            jaFez2 = True
+            jaFez = False
+            teste = 0
             try:
                 data = {"presença": "n_presente"}
                 headers = {"Content-Type": "application/json"}
@@ -48,27 +71,6 @@ while True:
                     print(f"Falha ao enviar dados para a API. Código de status: {response.status_code}")
             except Exception as e:
                 print(f"Erro ao enviar dados para a API: {e}")
-            
-    
-    if movimento:
-        print("Presença detectada!")
-
-        teste2 = 0
-        teste = True
-
-        # Aqui você pode adicionar a lógica para enviar dados para a API
-        # Exemplo de envio de dados usando requests.post com JSON
-        try:
-            data = {"presença": "presente"}
-            headers = {"Content-Type": "application/json"}
-            response = requests.post(API_URL, data=json.dumps(data), headers=headers)
-
-            if response.status_code == 200:
-                print("Dados enviados com sucesso para a API!")
-            else:
-                print(f"Falha ao enviar dados para a API. Código de status: {response.status_code}")
-        except Exception as e:
-            print(f"Erro ao enviar dados para a API: {e}")
 
     cv2.imshow("Detecção de Presença", frame_atual)
     key = cv2.waitKey(1) & 0xFF
