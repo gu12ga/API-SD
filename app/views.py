@@ -35,7 +35,7 @@ def ilumina(request):
   global resultado_do_request
   if request.method == 'GET':
     if resultado_do_request is not None:
-      return JsonResponse({'mensagem': f'Valor de presença: {resultado_do_request}'})
+      return JsonResponse({'presença': f'{resultado_do_request}'})
     else:
       return JsonResponse({'error': 'Nenhum valor de presença encontrado'}, status=400)
   return JsonResponse({'error': 'Somente métodos POST são permitidos'}, status=405)
