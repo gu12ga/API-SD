@@ -26,7 +26,7 @@ while True:
         presenca = data.get('presença', 'ausente')
 
         if presenca == 'presente':
-            set_brightness(0.2)
+            set_brightness(0.8)
             print("Presente!!!")
         else:
             set_brightness(0.2)
