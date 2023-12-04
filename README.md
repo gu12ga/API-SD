@@ -1,7 +1,11 @@
-# Alunos: Gustavo Gabriel Martins
-# Ronald De Souza Galdino
-# Luis Felipe Costa Teixeira
+# Projeto: Controle de Brilho Distribuído
 
+## Alunos
+- Gustavo Gabriel Martins
+- Ronald De Souza Galdino
+- Luis Felipe Costa Teixeira
+
+## Índice
 # Índice
 - [Descrição da Arquitetura no GitHub](#descrição-da-arquitetura-no-github)
   - [Visão Geral do Sistema Distribuído](#1-visão-geral-do-sistema-distribuído)
@@ -11,8 +15,10 @@
   - [Referências e Base Teórica](#5-referências-e-base-teórica)
 - [Qualidade do Tutorial no README](#qualidade-do-tutorial-no-readme)
   - [Instalação](#1-instalação)
-  - [Configuração](#2-configuração)
+  - [Configuração](#2-configuração) 
   - [Execução do Sistema](#3-execução-do-sistema)
+    - [Para leitor.py (Sensor)](#para-leitorpy-sensor)
+    - [Para luz.py (Recebedor de Solicitações)](#para-luzpy-recebedor-de-solicitações-e-controlador-de-brilho)
   - [Uso do Sensor de Presença](#4-uso-do-sensor-de-presença)
   - [Exemplos de Requisições à API](#5-exemplos-de-requisições-à-api)
   - [Resolução de Problemas Comuns](#6-resolução-de-problemas-comuns)
@@ -22,62 +28,127 @@
   - [Arquitetura em Camadas](#3-arquitetura-em-camadas)
   - [Arquitetura de Eventos (opcional)](#4-arquitetura-de-eventos-opcional)
 
-## Descrição da Arquitetura no GitHub:
-## 1. Visão Geral do Sistema Distribuído:
+## Descrição da Arquitetura no GitHub
+
+### 1. Visão Geral do Sistema Distribuído
 
 O projeto visa criar um sistema distribuído utilizando Django, destacando a necessidade de distribuição para suportar a complexidade da aplicação. Os principais componentes incluem microserviços, uma REST API, e integração com um sensor de presença baseado em câmera para controle de luz do computador.
-## 2. Arquitetura de Microserviços:
+
+### 2. Arquitetura de Microserviços
 
 O sistema é estruturado em microserviços independentes, cada um responsável por funcionalidades específicas. Os microserviços são modularizados para facilitar manutenção, escalabilidade e implementação ágil de novos recursos.
-## 3. Integração com Django:
 
-O Django é fundamental na construção da REST API, gerenciando a lógica de negócios e a comunicação entre os microserviços. Sua estrutura MVC (Model-View-Controller) é aproveitada para uma organização eficiente do código.
-## 4. Sensor de Presença e Controle de Luz:
+### 3. Integração com Django
+
+A integração com o Django é essencial para o funcionamento da REST API, mesmo que não seja utilizado um banco de dados tradicional. Ao contrário do padrão MVC (Model-View-Controller), que normalmente está associado ao Django, nossa arquitetura se beneficia da organização oferecida pelo padrão MVT (Model-View-Template).
+
+No contexto do nosso projeto:
+
+- **Model (Modelo):** Representa a estrutura dos dados necessários para o funcionamento da API, mesmo que não haja persistência em um banco de dados. Os modelos podem conter campos relevantes para a comunicação e processamento de informações, refletindo a estrutura de dados do sistema distribuído.
+
+- **View (Visão):** Atua como controlador de requisições, recebendo dados do sensor de presença, processando-os e acionando a lógica necessária para ajustar o brilho no computador correspondente. As views interagem diretamente com os microserviços e utilizam o Django para gerenciar a comunicação.
+
+- **Template (Template):** Neste contexto, o template pode ser considerado como a estrutura e formatação das respostas da API. Mesmo que não existam páginas HTML tradicionais, o template ainda desempenha um papel ao definir a estrutura das respostas que são enviadas para os clientes (sensores e controladores de luz).
+
+### 4. Sensor de Presença e Controle de Luz
 
 Um componente crucial do sistema é o sensor de presença baseado na câmera. Ele detecta a presença e altera dinamicamente a intensidade da luz do computador. A integração com Django ocorre por meio de APIs dedicadas que recebem informações do sensor e ajustam as configurações de luz correspondentes.
-## 5. Referências e Base Teórica:
 
-A arquitetura reflete conceitos fundamentais discutidos na disciplina GCC129 - Sistemas Distribuídos, conforme abordados no livro base. Referências adicionais incluem [inserir referências específicas utilizadas].
-Qualidade do Tutorial no README:
-## 1. Instalação:
+### 5. Referências e Base Teórica
 
-    Clone o repositório: git clone https://github.com/seugrupo/nome-do-repositorio.git
-    Instale as dependências: pip install -r requirements.txt
+A arquitetura reflete conceitos fundamentais discutidos na disciplina GCC129 - Sistemas Distribuídos, conforme abordados no livro base. Referências adicionais incluem pesquisas em sites.
 
-## 2. Configuração:
+## Qualidade do Tutorial no README
 
-    Configure as variáveis de ambiente no arquivo .env com as informações necessárias.
+### 1. Instalação
 
-## 3. Execução do Sistema:
+Clone o repositório:
 
-    Execute o servidor Django: python manage.py runserver
+git clone https://github.com/gu12ga/API-SD/tree/main
 
-## 4. Uso do Sensor de Presença:
+### 2. Configuração
 
-    Siga as instruções no diretório sensor-de-presenca para configurar e executar o sensor.
+Após clonar o repositório, a configuração varia dependendo do papel que a sua máquina desempenhará no sistema: se será o leitor.py (sensor) ou o luz.py (recebedor de solicitações e controlador de brilho). Abaixo estão as instruções para cada cenário:
 
-## 5. Exemplos de Requisições à API:
+Se a sua máquina é responsável pelo sensor, você deve apenas rodar o código.
 
-    Consulte a documentação da API em /api/docs para exemplos de requisições.
+Se sua máquina é responsável pelo controle de brilho (luz.py), é importante observar a branch em que você está trabalhando:
 
-## 6. Resolução de Problemas Comuns:
+Para a branch cliente, é necessário instalar o xrandr. Execute:
 
-    Consulte a seção de Perguntas Frequentes (FAQ) para solucionar problemas comuns.
+    sudo apt-get install x11-xserver-utils
 
-## Arquiteturas Utilizadas:
-## 1. Arquitetura de Microserviços:
+Para a branch cliente2, é necessário instalar o light. Execute:
+
+    sudo apt-get install light
+
+Certifique-se de instalar as dependências corretas de acordo com a branch que você está utilizando.
+
+
+### 3. Execução do Sistema
+
+#### Para leitor.py (Sensor):
+
+1. Abra o terminal e navegue até o diretório do projeto.
+2. Execute o seguinte comando para rodar o código:
+ 
+   python3 leitor.py ou execute direto do VS Code
+
+#### Para luz.py (Recebedor de Solicitações e Controlador de Brilho):
+
+1. Abra o terminal e navegue até o diretório do projeto.
+2. Execute o seguinte comando para rodar o código:
+
+   python3 leitor.py no terminal do diretório
+
+### 4. Uso do Sensor de Presença
+
+Ao executar o sensor, a câmera do seu notebook ou computador será ativada, iniciando a detecção de presença. Em caso de movimento detectado, o sensor enviará a informação para o servidor PythonAnywhere que hospeda a API Django. Isso acionará a alteração dinâmica do brilho em outro computador que estiver executando o código responsável pelo controle de luz.
+
+### 5. Exemplos de Requisições à API
+A API possui endpoints específicos para o sensor de presença e o controle de luz. Abaixo estão exemplos de como realizar requisições para interagir com esses endpoints:
+
+- **Enviar Dados do Sensor (Detectar Presença):**
+  - **Método:** POST
+  - **Endpoint:** `/api/leitor/`
+  - **Descrição:** Envia dados do sensor para o servidor indicando a detecção de presença.
+
+- **Ajustar Brilho com Base na Detecção de Movimento:**
+
+  - **Método:** POST
+  - **Endpoint:** `/api/ilumina/`
+  - **Descrição:** Recebe informações do sensor e ajusta dinamicamente o brilho.
+
+### 6. Resolução de Problemas Comuns
+
+Caso seu computador ou notebook não possua uma câmera integrada ou não seja possível acessá-la, você pode encontrar o seguinte erro ao tentar executar o sensor de presença (leitor.py):
+
+   - **Sem o sensor ligado na camera nunca vai ser identificada a presença e não vai mandar nenhuma requisição**
+
+1. Verifique se sua máquina possui uma câmera integrada. Caso não tenha, considere usar um dispositivo externo ou adaptadores de câmera compatíveis.
+
+2. Certifique-se de que a câmera esteja corretamente configurada e conectada ao computador.
+
+3. Se você estiver utilizando um ambiente de desenvolvimento, como o VS Code, confirme se as permissões para acessar a câmera foram concedidas.
+
+4. Caso o problema persista, consulte a documentação da biblioteca que está sendo utilizada para a captura de imagens (por exemplo, OpenCV) para obter informações específicas sobre configuração e detecção de câmeras.
+
+Lembre-se de que a presença de uma câmera é fundamental para o funcionamento adequado do sensor de presença. Caso ainda encontre dificuldades, busque suporte técnico ou consulte fóruns relacionados à biblioteca específica que está sendo utilizada.
+
+### Arquiteturas Utilizadas
+### 1. Arquitetura de Microserviços
 
 Os microserviços incluem:
 
     auth-service: Serviço de autenticação.
     light-control-service: Serviço de controle de luz.
 
-## 2. Padrão REST para a API:
+### 2. Padrão REST para a API
 
 A API segue os princípios RESTful, proporcionando comunicação eficiente entre os microserviços.
-## 3. Arquitetura em Camadas:
+### 3. Arquitetura em Camadas
 
 A aplicação é dividida em camadas distintas, separando apresentação, lógica de negócios e acesso a dados.
-## 4. Arquitetura de Eventos (opcional):
+### 4. Arquitetura de Eventos (opcional)
 
 A arquitetura incorpora eventos assíncronos para comunicação eficiente entre os microserviços, permitindo uma resposta rápida a eventos do sensor.
