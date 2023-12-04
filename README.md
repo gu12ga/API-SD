@@ -40,15 +40,19 @@ O sistema é estruturado em microserviços independentes, cada um responsável p
 
 ### 3. Integração com Django
 
-A integração com o Django é essencial para o funcionamento da REST API, mesmo que não seja utilizado um banco de dados tradicional. Ao contrário do padrão MVC (Model-View-Controller), que normalmente está associado ao Django, nossa arquitetura se beneficia da organização oferecida pelo padrão MVT (Model-View-Template).
+Cliente-Servidor em Sistemas Distribuídos
 
-No contexto do nosso projeto:
+O paradigma cliente-servidor é fundamental em sistemas distribuídos, onde as funções do sistema são divididas entre clientes, que solicitam serviços, e servidores, que fornecem esses serviços. No contexto do projeto, os sensores de presença agem como clientes, enviando dados para a REST API no servidor PythonAnywhere, que por sua vez processa esses dados e envia comandos para os controladores de luz, que atuam como servidores.
 
-- **Model (Modelo):** Representa a estrutura dos dados necessários para o funcionamento da API, mesmo que não haja persistência em um banco de dados. Os modelos podem conter campos relevantes para a comunicação e processamento de informações, refletindo a estrutura de dados do sistema distribuído.
+**Características do Modelo Cliente-Servidor:**
 
-- **View (Visão):** Atua como controlador de requisições, recebendo dados do sensor de presença, processando-os e acionando a lógica necessária para ajustar o brilho no computador correspondente. As views interagem diretamente com os microserviços e utilizam o Django para gerenciar a comunicação.
+  - Centralização de Lógica de Negócios: O servidor centraliza a lógica de negócios e fornece serviços para os clientes. Neste projeto, o servidor Django gerencia a lógica de controle de luz e recebe dados do sensor.
 
-- **Template (Template):** Neste contexto, o template pode ser considerado como a estrutura e formatação das respostas da API. Mesmo que não existam páginas HTML tradicionais, o template ainda desempenha um papel ao definir a estrutura das respostas que são enviadas para os clientes (sensores e controladores de luz).
+  - Descentralização de Recursos: Os clientes (sensores) e servidores (controladores de luz) podem estar distribuídos em diferentes locais geográficos, permitindo uma arquitetura distribuída eficiente.
+
+  - Comunicação Assíncrona: O modelo cliente-servidor permite a comunicação assíncrona, onde os clientes podem enviar solicitações e continuar a operar enquanto aguardam a resposta do servidor. Isso é crucial em sistemas distribuídos para otimizar o desempenho e a escalabilidade.
+
+  - Escalabilidade: A arquitetura cliente-servidor facilita a escalabilidade, permitindo a adição de novos clientes e servidores conforme necessário.
 
 ### 4. Sensor de Presença e Controle de Luz
 
