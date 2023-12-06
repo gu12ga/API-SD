@@ -8,6 +8,7 @@
 ## Índice
 # Índice
 - [Descrição da Arquitetura no GitHub](#descrição-da-arquitetura-no-github)
+  - [Criação do Django](#0-Criação do DJango)
   - [Visão Geral do Sistema Distribuído](#1-visão-geral-do-sistema-distribuído)
   - [Arquitetura de Microserviços](#2-arquitetura-de-microserviços)
   - [Integração com Django](#3-integração-com-django)
@@ -22,13 +23,8 @@
   - [Uso do Sensor de Presença](#4-uso-do-sensor-de-presença)
   - [Exemplos de Requisições à API](#5-exemplos-de-requisições-à-api)
   - [Resolução de Problemas Comuns](#6-resolução-de-problemas-comuns)
-- [Arquiteturas Utilizadas](#arquiteturas-utilizadas)
-  - [Arquitetura de Microserviços](#1-arquitetura-de-microserviços)
-  - [Padrão REST para a API](#2-padrão-rest-para-a-api)
-  - [Arquitetura em Camadas](#3-arquitetura-em-camadas)
-  - [Arquitetura de Eventos (opcional)](#4-arquitetura-de-eventos-opcional)
 
-## Criação do DJango
+### 0. Criação do DJango
 Requisitos: Ter o python instalado.
 
 Primeiro é preciso baixar o DJango, rode o comando no terminal: pip install django
@@ -109,11 +105,11 @@ Se a sua máquina é responsável pelo sensor, você deve apenas rodar o código
 
 Se sua máquina é responsável pelo controle de brilho (luz.py), é importante observar a branch em que você está trabalhando:
 
-Para a branch cliente, é necessário instalar o xrandr. Execute:
+Para a branch cliente2, é necessário instalar o xrandr. Execute:
 
     sudo apt-get install x11-xserver-utils
 
-Para a branch cliente2, é necessário instalar o light. Execute:
+Para a branch cliente2.1, é necessário instalar o light. Execute:
 
     sudo apt-get install light
 
@@ -134,7 +130,7 @@ Certifique-se de instalar as dependências corretas de acordo com a branch que v
 1. Abra o terminal e navegue até o diretório do projeto.
 2. Execute o seguinte comando para rodar o código:
 
-   python3 leitor.py no terminal do diretório
+   python3 luz.py no terminal do diretório
 
 ### 4. Uso do Sensor de Presença
 
@@ -170,20 +166,3 @@ Caso seu computador ou notebook não possua uma câmera integrada ou não seja p
 
 Lembre-se de que a presença de uma câmera é fundamental para o funcionamento adequado do sensor de presença. Caso ainda encontre dificuldades, busque suporte técnico ou consulte fóruns relacionados à biblioteca específica que está sendo utilizada.
 
-### Arquiteturas Utilizadas
-### 1. Arquitetura de Microserviços
-
-Os microserviços incluem:
-
-    auth-service: Serviço de autenticação.
-    light-control-service: Serviço de controle de luz.
-
-### 2. Padrão REST para a API
-
-A API segue os princípios RESTful, proporcionando comunicação eficiente entre os microserviços.
-### 3. Arquitetura em Camadas
-
-A aplicação é dividida em camadas distintas, separando apresentação, lógica de negócios e acesso a dados.
-### 4. Arquitetura de Eventos (opcional)
-
-A arquitetura incorpora eventos assíncronos para comunicação eficiente entre os microserviços, permitindo uma resposta rápida a eventos do sensor.
