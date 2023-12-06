@@ -6,9 +6,9 @@
 - Luis Felipe Costa Teixeira
 
 ## Índice
-# Índice
+
 - [Descrição da Arquitetura no GitHub](#descrição-da-arquitetura-no-github)
-  - [Criação do Django](#0-Criação do DJango)
+  - [Criação do Django](#criação-do-django)
   - [Visão Geral do Sistema Distribuído](#1-visão-geral-do-sistema-distribuído)
   - [Arquitetura de Microserviços](#2-arquitetura-de-microserviços)
   - [Integração com Django](#3-integração-com-django)
@@ -24,16 +24,38 @@
   - [Exemplos de Requisições à API](#5-exemplos-de-requisições-à-api)
   - [Resolução de Problemas Comuns](#6-resolução-de-problemas-comuns)
 
-### 0. Criação do DJango
+### Criação do DJango
 Requisitos: Ter o python instalado.
 
-Primeiro é preciso baixar o DJango, rode o comando no terminal: pip install django
-Teste se ocorreu corretamente: django-admin --version
+Primeiro é preciso baixar o DJango, rode o comando no terminal: 
 
-Para criar o projeto Django rode o comando em um diretório específico: django-admin startproject nome_do_projeto
-Caso haja migrações para o BD: python manage.py migrate
+```
+pip install django
+```
 
-Criando um novo aplicativo: python manage.py startapp nome_do_app
+Teste se ocorreu corretamente:
+
+```
+django-admin --version
+```
+
+Para criar o projeto Django rode o comando em um diretório específico: 
+
+```
+django-admin startproject nome_do_projeto
+```
+
+Caso haja migrações para o BD: 
+
+```
+python manage.py migrate
+```
+
+Criando um novo aplicativo: 
+
+```
+python manage.py startapp nome_do_app
+```
 
 Altere a configuração do arquivo settings.py para adcionar o app e poder acessar ele:
 INSTALLED_APPS = [
