@@ -82,6 +82,10 @@ O paradigma cliente-servidor é fundamental em sistemas distribuídos, onde as f
 
   - Escalabilidade: A arquitetura cliente-servidor facilita a escalabilidade, permitindo a adição de novos clientes e servidores conforme necessário.
 
+Arquitetura Baseada em Eventos
+
+Dentro do contexto do trabalho, foi utilizada a arquitetura cliente-servidor como base para a implementação do estilo arquitetônico de marramento de eventos. No caso, o barremnto seria a API, e os componentes seriam o sensor de luz baseado em câmera e o atuador de luz.
+
 ### 4. Sensor de Presença e Controle de Luz
 
 Um componente crucial do sistema é o sensor de presença baseado na câmera. Ele detecta a presença e altera dinamicamente a intensidade da luz do computador. A integração com Django ocorre por meio de APIs dedicadas que recebem informações do sensor e respondem as requisições dos clientes quando eles solicitam, os quais ajustam as configurações de luz correspondentes.
