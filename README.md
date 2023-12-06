@@ -51,6 +51,11 @@ urlpatterns = [
     path('', include('app.urls'))
 ]
 
+Adicone o localhost no arquivo settings.py:
+ALLOWED_HOSTS = ['127.0.0.1']
+
+Para executar, basta rodar o comando no terminal: python manage.py runserver
+
 ## Descrição da Arquitetura no GitHub
 
 ### 1. Visão Geral do Sistema Distribuído
