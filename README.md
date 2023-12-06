@@ -108,6 +108,11 @@ Dentro do contexto do trabalho, foi utilizada a arquitetura cliente-servidor com
 
 Um componente crucial do sistema é o sensor de presença baseado na câmera. Ele detecta a presença e altera dinamicamente a intensidade da luz do computador. A integração com Django ocorre por meio de APIs dedicadas que recebem informações do sensor e respondem as requisições dos clientes quando eles solicitam, os quais ajustam as configurações de luz correspondentes.
 
+A nossa API está hospedada em um servidor python anywhere, so seguinte link:
+
+luisteixeira13.pythonanywhere.com
+
+
 ### 5. Referências e Base Teórica
 
 A arquitetura reflete conceitos fundamentais discutidos na disciplina GCC129 - Sistemas Distribuídos, conforme abordados no livro base. Referências adicionais incluem pesquisas em sites.[^1]
