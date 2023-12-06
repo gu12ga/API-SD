@@ -28,6 +28,29 @@
   - [Arquitetura em Camadas](#3-arquitetura-em-camadas)
   - [Arquitetura de Eventos (opcional)](#4-arquitetura-de-eventos-opcional)
 
+## Criação do DJango
+Requisitos: Ter o python instalado.
+
+Primeiro é preciso baixar o DJango, rode o comando no terminal: pip install django
+Teste se ocorreu corretamente: django-admin --version
+
+Para criar o projeto Django rode o comando em um diretório específico: django-admin startproject nome_do_projeto
+Caso haja migrações para o BD: python manage.py migrate
+
+Criando um novo aplicativo: python manage.py startapp nome_do_app
+
+Altere a configuração do arquivo settings.py para adcionar o app e poder acessar ele:
+INSTALLED_APPS = [
+    # ...
+    'nome_do_app',
+]
+
+Para adicionar as URLs, crie um arquivo url.py no app para exportar as urls para o arquivo url padrão da API.
+urls.py padrão da API:
+urlpatterns = [
+    path('', include('app.urls'))
+]
+
 ## Descrição da Arquitetura no GitHub
 
 ### 1. Visão Geral do Sistema Distribuído
@@ -42,13 +65,13 @@ O sistema é estruturado em microserviços independentes, cada um responsável p
 
 Cliente-Servidor em Sistemas Distribuídos
 
-O paradigma cliente-servidor é fundamental em sistemas distribuídos, onde as funções do sistema são divididas entre clientes, que solicitam serviços, e servidores, que fornecem esses serviços. No contexto do projeto, os sensores de presença agem como clientes, enviando dados para a REST API no servidor PythonAnywhere, que por sua vez processa esses dados e envia comandos para os controladores de luz, que atuam como servidores.
+O paradigma cliente-servidor é fundamental em sistemas distribuídos, onde as funções do sistema são divididas entre clientes, que solicitam serviços, e servidores, que fornecem esses serviços. No contexto do projeto, o sensor de presença e o atuador de luz agem como clientes, fazendo requisições para a REST API no servidor PythonAnywhere, que por sua vez processa esses dados e os responde.
 
 **Características do Modelo Cliente-Servidor:**
 
   - Centralização de Lógica de Negócios: O servidor centraliza a lógica de negócios e fornece serviços para os clientes. Neste projeto, o servidor Django gerencia a lógica de controle de luz e recebe dados do sensor.
 
-  - Descentralização de Recursos: Os clientes (sensores) e servidores (controladores de luz) podem estar distribuídos em diferentes locais geográficos, permitindo uma arquitetura distribuída eficiente.
+  - Descentralização de Recursos: Os clientes (sensores e atuadores de luz) e o servidor podem estar distribuídos em diferentes locais geográficos, permitindo uma arquitetura distribuída eficiente.
 
   - Comunicação Assíncrona: O modelo cliente-servidor permite a comunicação assíncrona, onde os clientes podem enviar solicitações e continuar a operar enquanto aguardam a resposta do servidor. Isso é crucial em sistemas distribuídos para otimizar o desempenho e a escalabilidade.
 
@@ -56,14 +79,13 @@ O paradigma cliente-servidor é fundamental em sistemas distribuídos, onde as f
 
 ### 4. Sensor de Presença e Controle de Luz
 
-Um componente crucial do sistema é o sensor de presença baseado na câmera. Ele detecta a presença e altera dinamicamente a intensidade da luz do computador. A integração com Django ocorre por meio de APIs dedicadas que recebem informações do sensor e ajustam as configurações de luz correspondentes.
+Um componente crucial do sistema é o sensor de presença baseado na câmera. Ele detecta a presença e altera dinamicamente a intensidade da luz do computador. A integração com Django ocorre por meio de APIs dedicadas que recebem informações do sensor e respondem as requisições dos clientes quando eles solicitam, os quais ajustam as configurações de luz correspondentes.
 
 ### 5. Referências e Base Teórica
 
 A arquitetura reflete conceitos fundamentais discutidos na disciplina GCC129 - Sistemas Distribuídos, conforme abordados no livro base. Referências adicionais incluem pesquisas em sites.
 
 ## Qualidade do Tutorial no README
-
 ### 1. Instalação
 
 Clone o repositório:
