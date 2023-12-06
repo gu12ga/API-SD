@@ -119,7 +119,7 @@ A API possui endpoints específicos para o sensor de presença e o controle de l
 
 - **Ajustar Brilho com Base na Detecção de Movimento:**
 
-  - **Método:** POST
+  - **Método:** GET
   - **Endpoint:** `/api/ilumina/`
   - **Descrição:** Recebe informações do sensor e ajusta dinamicamente o brilho.
 
