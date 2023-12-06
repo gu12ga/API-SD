@@ -1,6 +1,6 @@
 # Projeto: Controle de Brilho Distribuído
 
-## Alunos
+## Alunos 14A
 - Gustavo Gabriel Martins
 - Ronald De Souza Galdino
 - Luis Felipe Costa Teixeira
@@ -102,7 +102,7 @@ O paradigma cliente-servidor é fundamental em sistemas distribuídos, onde as f
 
 Arquitetura Baseada em Eventos
 
-Dentro do contexto do trabalho, foi utilizada a arquitetura cliente-servidor como base para a implementação do estilo arquitetônico de marramento de eventos. No caso, o barremnto seria a API, e os componentes seriam o sensor de luz baseado em câmera e o atuador de luz.
+Dentro do contexto do trabalho, foi utilizada a arquitetura cliente-servidor como base para a implementação do estilo arquitetônico de barramento de eventos. No caso, o barramento seria a API, e os componentes seriam o sensor de luz baseado em câmera e o atuador de luz.
 
 ### 4. Sensor de Presença e Controle de Luz
 
@@ -110,14 +110,16 @@ Um componente crucial do sistema é o sensor de presença baseado na câmera. El
 
 ### 5. Referências e Base Teórica
 
-A arquitetura reflete conceitos fundamentais discutidos na disciplina GCC129 - Sistemas Distribuídos, conforme abordados no livro base. Referências adicionais incluem pesquisas em sites.
+A arquitetura reflete conceitos fundamentais discutidos na disciplina GCC129 - Sistemas Distribuídos, conforme abordados no livro base. Referências adicionais incluem pesquisas em sites.[^1]
 
 ## Qualidade do Tutorial no README
 ### 1. Instalação
 
 Clone o repositório:
 
+```
 git clone https://github.com/gu12ga/API-SD/tree/main
+```
 
 ### 2. Configuração
 
@@ -129,11 +131,14 @@ Se sua máquina é responsável pelo controle de brilho (luz.py), é importante 
 
 Para a branch cliente2, é necessário instalar o xrandr. Execute:
 
+```
     sudo apt-get install x11-xserver-utils
-
+```
 Para a branch cliente2.1, é necessário instalar o light. Execute:
 
+```
     sudo apt-get install light
+```
 
 Certifique-se de instalar as dependências corretas de acordo com a branch que você está utilizando.
 
@@ -144,15 +149,22 @@ Certifique-se de instalar as dependências corretas de acordo com a branch que v
 
 1. Abra o terminal e navegue até o diretório do projeto.
 2. Execute o seguinte comando para rodar o código:
- 
-   python3 leitor.py ou execute direto do VS Code
+   
+```
+   python3 leitor.py
+```
+ou execute direto do VS Code.
 
 #### Para luz.py (Recebedor de Solicitações e Controlador de Brilho):
 
 1. Abra o terminal e navegue até o diretório do projeto.
 2. Execute o seguinte comando para rodar o código:
 
-   python3 luz.py no terminal do diretório
+```
+   python3 luz.py 
+```
+
+**OBS: no terminal do diretório**
 
 ### 4. Uso do Sensor de Presença
 
@@ -188,3 +200,4 @@ Caso seu computador ou notebook não possua uma câmera integrada ou não seja p
 
 Lembre-se de que a presença de uma câmera é fundamental para o funcionamento adequado do sensor de presença. Caso ainda encontre dificuldades, busque suporte técnico ou consulte fóruns relacionados à biblioteca específica que está sendo utilizada.
 
+[^1]: https://github.com/sistemas-de-informacao-univas/SD8/blob/master/Livro%20Sistemas%20Distribuidos%20Principios%20e%20Paradigmas%20-%20Tanembaum%202a%20ed.pdf
